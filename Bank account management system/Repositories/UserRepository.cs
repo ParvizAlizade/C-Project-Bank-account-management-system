@@ -2,49 +2,33 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 namespace Bank_account_management_system.Repositories
 {
     class UserRepository : IUserRepository
     {
         private Bank _bank;
-        public Bank  Banks { get => _bank; }
-        public UserRepository()
-        {
-            _bank = new Bank();
-        }
+        public Bank Bank { get; set; }
 
-        public void UserRegistration(string name, string surname, string email, string password, bool isadmin)
+        public void UserRegistration(User user)
         {
-            User user = new User(name,surname,email,password,isadmin);
             Array.Resize(ref _bank.users, _bank.users.Length + 1);
             _bank.users[_bank.users.Length - 1] = user;
-             
+            Console.WriteLine("Your Registration is done Succesfully:)");
         }
-        public bool UserLogin(string email, string password)
+        public void UserLogin(User user)
         {
-            foreach (User user1 in _bank.users)
-            {
-                if (user1.Email == email && user1.Password == password)
-                {
-                    user1.IsLogged = true;
-                    return user1.IsLogged;
-                }
-            }
-            return false;
+            user.IsLogged = true;
+            Console.WriteLine("Login Ready \n");
+            Thread.Sleep(1000);
+            Console.WriteLine("Loading........");
+            Thread.Sleep(2000);
+            Console.WriteLine(user.Name+" "+user.SurName);
         }
-        public bool FindUser(User[] user, string email)
+        public void FindUser(User user)
         {
-            foreach (User user1 in _bank.users)
-            {
-                if (user1.Email == email)
-                {
-                    return true;
-                    break;
-                }
-            }
-            return false;
+            Console.WriteLine(user.Name+" "+user.SurName);
         }
-        
     }
 }

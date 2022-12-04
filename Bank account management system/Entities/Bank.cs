@@ -8,7 +8,7 @@ namespace Bank_account_management_system.Entities
     {
         public int Id;
         public User[] users;
-        static int _count=0;
+        static int _count;
 
         public Bank(User[] users)
         {
@@ -16,9 +16,9 @@ namespace Bank_account_management_system.Entities
             Id = ++_count; 
         }
 
-        public Bank()
+        static Bank()
         {
-
+            _count = 1;
         }
     }
 }

@@ -7,9 +7,10 @@ namespace Bank_account_management_system.Repositories
 {
     interface IUserRepository
     {
-        public void UserRegistration(string name,string surname,string email,string password,bool isadmin);
-        public bool UserLogin(string email,string password);
+        public Bank Bank { get; }
+        public void UserRegistration(User user);
+        public void UserLogin(User user);
 
-        public bool FindUser(User[] user,string email);
+        public void FindUser(User user);
     }
 }

@@ -89,25 +89,16 @@ namespace Bank_account_management_system.Entities
         public bool IsBlocked { get; set; }
         public bool IsLogged { get; set; }
         static int _count=0 ;
-        public User(string name, string surname, int balance, string email, string password, bool isadmin, bool isblocked=false, bool islogged=false)
+        public User(string name, string surname,string email, string password, bool isadmin)
         {
             Name = name;
             SurName = surname;
             Email = email;
             Id = ++_count;
             Password = password;
-            IsAdmin = isadmin;
-            IsBlocked = isblocked;
-            IsLogged = islogged;
-        }
-
-        public User(string name, string surname, string email, string password,bool isadmin)
-        {
-            Name = name;
-            SurName = surname;
-            Email = email;
-            Password = password;
-            IsAdmin = isadmin;
+            IsAdmin = false;
+            IsBlocked = false;
+            IsLogged = false;
         }
     }
 }
