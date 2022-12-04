@@ -1,0 +1,5 @@
+C:\Users\LENOVO\source\repos\Bank account management system\Bank account management system\obj\Debug\netcoreapp3.1\Bank account management system.csproj.AssemblyReference.cache
+C:\Users\LENOVO\source\repos\Bank account management system\Bank account management system\obj\Debug\netcoreapp3.1\Bank account management system.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\LENOVO\source\repos\Bank account management system\Bank account management system\obj\Debug\netcoreapp3.1\Bank account management system.AssemblyInfoInputs.cache
+C:\Users\LENOVO\source\repos\Bank account management system\Bank account management system\obj\Debug\netcoreapp3.1\Bank account management system.AssemblyInfo.cs
+C:\Users\LENOVO\source\repos\Bank account management system\Bank account management system\obj\Debug\netcoreapp3.1\Bank account management system.csproj.CoreCompileInputs.cache

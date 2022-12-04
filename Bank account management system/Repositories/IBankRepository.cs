@@ -4,7 +4,9 @@ using System.Text;
 
 namespace Bank_account_management_system.Repositories
 {
-    class UserRepo
+    interface IBankRepository
     {
+
     }
+
 }
