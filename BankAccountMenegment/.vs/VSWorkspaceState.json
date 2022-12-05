@@ -1,0 +1,10 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\BankAccountMenegment",
+    "\\BankAccountMenegment\\Repository",
+    "\\BankAccountMenegment\\Service"
+  ],
+  "SelectedNode": "\\BankAccountMenegment\\Service\\BankService.cs",
+  "PreviewInSolutionExplorer": false
+}
