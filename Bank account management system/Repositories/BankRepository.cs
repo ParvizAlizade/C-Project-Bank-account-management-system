@@ -5,28 +5,34 @@ using System.Text;
 
 namespace Bank_account_management_system.Repositories
 {
-    class BankRepository : IBankRepository
+    internal class BankRepository : IBankRepository
     {
-        private Bank _bank;
-        
-        public Bank Bank { get => _bank; }
-
+        Bank _bank;
+        public Bank bank
+        {get
+            {
+                return _bank;
+            }
+        }
+        public BankRepository(Bank bank)
+        {
+            _bank = bank;
+        }
         public void BankUserList()
         {
-        foreach (User userr in _bank.users)
-        {
-            Console.WriteLine(userr);
+            foreach (User user in _bank.users)
+            {
+                Console.WriteLine(user.Name, user.SurName);
+            }
         }
-        }
-
         public bool BlockUser(User user)
         {
-            throw new NotImplementedException();
+            return user.IsBlocked = true;
         }
 
-        public string ChangePassword(User user, string newpassword)
+        public string ChangePassword(User user, string newPassword)
         {
-            user.Password = newpassword;
+            user.Password = newPassword;
             return user.Password;
         }
 
@@ -35,14 +41,20 @@ namespace Bank_account_management_system.Repositories
             Console.WriteLine(user.Balance);
         }
 
-        public bool LogOut()
+        public void ToUpBalance(User user, double amount)
         {
-            throw new NotImplementedException();
+            user.Balance += amount;
+            Console.WriteLine($"New Balance: {user.Balance}");
         }
 
-        public void TopUpBalance(User user, double includedbalance)
+        public bool LogOut(User user)
         {
-            user.Balance += includedbalance;
+            return user.IsLogged = false;
+        }
+
+        public override string ToString()
+        {
+            return base.ToString();
         }
     }
 }

@@ -6,18 +6,19 @@ namespace Bank_account_management_system.Entities
 {
     class User
     {
+
         public static int Id { get; set; }
-        private string _name;
-        public string Name 
+        protected string _name;
+        public string Name
         {
-           get =>_name;
-             set
-             {
-               if (value.Length>3)
-               {
-                 _name = value;
-               }        
-             }
+            get => _name;
+            set
+            {
+                if (value.Length > 3)
+                {
+                    _name = value;
+                }
+            }
         }
         private string _surName;
         public string SurName
@@ -34,62 +35,35 @@ namespace Bank_account_management_system.Entities
 
         public double Balance { get; set; }
         private string _email;
-        public string Email 
-        { 
-          get=>_email;
-          set
-          {
-                if (value.Contains('@')==true)
+        public string Email
+        {
+            get => _email;
+            set
+            {
+                if (EmailChecker(value))
                 {
-                    Email = value;
+                    _email = value;
                 }
-                
-          }
+            }
         }
         private string _password;
-        public string Password 
+        public string Password
         {
             get => _password;
-            set {
-                int haslower = 0;
-                int hasupper = 0;
-                int hasdigit = 0;
-
-                if (Password.Length>8)
+            set
+            {
+                if (CheckPassword(value))
                 {
-                    foreach (char item in Password)
-                    {
-                        if (char.IsLower(item))
-                        {
-                            haslower++;
-                        }
-                        else if (char.IsUpper(item))
-                        {
-                            hasupper++;
-                        }
-                        else if (char.IsDigit(item))
-                        {
-                            hasdigit++;
-                        }
-                        else if (hasdigit > 0 && haslower > 0 && hasupper > 0)
-                        {
-                            break;
-                        }
-                        else
-                        {
-                            Console.WriteLine("Duzgun daxil edin:");
-                            break;
-                        }
-                    }
-                    Password = value;
+                    _password = value;
                 }
 
-            } }
+            }
+        }
         public bool IsAdmin { get; set; }
         public bool IsBlocked { get; set; }
         public bool IsLogged { get; set; }
-        static int _count=0 ;
-        public User(string name, string surname,string email, string password, bool isadmin)
+        static int _count = 0;
+        public User(string name, string surname, string email, string password, bool isadmin)
         {
             Name = name;
             SurName = surname;
@@ -99,6 +73,57 @@ namespace Bank_account_management_system.Entities
             IsAdmin = false;
             IsBlocked = false;
             IsLogged = false;
+        }
+
+
+        public static bool CheckPassword(string pw)
+        {
+            bool hasDigit = false;
+            bool hasLower = false;
+            bool hasUpper = false;
+            bool result = false;
+
+            foreach (char item in pw)
+            {
+
+
+                if (char.IsDigit(item))
+                {
+                    hasDigit = true;
+                }
+                else if (char.IsLower(item))
+                {
+                    hasLower = true;
+                }
+                else if (char.IsUpper(item))
+                {
+                    hasUpper = true;
+                }
+                result = hasDigit && hasLower && hasUpper;
+                if (result)
+                {
+                    break;
+                }
+
+            }
+            return result;
+        }
+
+        public static bool EmailChecker(string symbol)
+        {
+            if (symbol.Contains('@'))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public override string ToString()
+        {
+            return base.ToString();
         }
     }
 }

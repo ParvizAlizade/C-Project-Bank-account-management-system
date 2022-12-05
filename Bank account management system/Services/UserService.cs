@@ -3,61 +3,78 @@ using Bank_account_management_system.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 namespace Bank_account_management_system.Services
 {
     class UserService
     {
-        readonly IUserRepository _userrepository;
-        public UserService()
+        readonly IUserRepository _repository;
+        Bank bank;
+        public UserService(Bank bank)
         {
-            _userrepository = new UserRepository();
+            this.bank = new Bank();
+            _repository = new UserRepository(this.bank);
         }
 
-        public bool UserRegistration(string name, string surname, string email, string password, bool isadmin)
+        public bool UserRegistration(string name, string surname, string email, string password, bool isAdmin)
         {
-            foreach (User user1 in _userrepository.Bank.users)
+            foreach (User user1 in bank.users)
             {
-                if (user1.Email==email)
+                if (user1.Email == email)
                 {
                     Console.WriteLine("This email had been registered");
+                    Thread.Sleep(1000);
+                    Console.Clear();
+                    MenuService.Registration();
                     return false;
                 }
             }
-            User user = new User(name, surname, email, password, isadmin);
-            _userrepository.UserRegistration(user);
+            User user = new User(name, surname, email, password, isAdmin);
+            _repository.UserRegistration(user);
             return true;
+
         }
-        
+
         public bool UserLogin(string email, string password)
         {
-            foreach (User user in _userrepository.Bank.users)
+            foreach (User item in bank.users)
             {
-                if (user.Email.Equals(email) && user.Password.Equals(password))
+                if (item.Email == email && item.Password == password)
                 {
-                    _userrepository.UserLogin(user);
+                    _repository.UserLogin(item);
+
+                    
                     return true;
                 }
             }
-            Console.WriteLine("Error!");
-
-            Console.Clear();
+            MenuService.AllServicess();
+            Console.WriteLine("Incorrect");
+            Thread.Sleep(2000);
             return false;
-          
         }
 
-        public bool? FindUser(string email)
+
+        public bool FindUser(string email)
         {
-            foreach (User user in _userrepository.Bank.users)
+            User exicted = default;
+            foreach (User gmail in bank.users)
             {
-                if (user.Email==email)
+                if (gmail.Email == email)
                 {
-                    _userrepository.FindUser(user);
-                    return true;
+                    exicted = gmail;
+                    _repository.FindUser(exicted);
+                    return false;
                 }
             }
+            if (exicted == null)
+            {
+                Console.WriteLine("--This email is not registered--");
+                return false;
+            }
+            Console.WriteLine("Not Found");
+            _repository.FindUser(exicted);
             return false;
         }
-     
     }
 }

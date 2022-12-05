@@ -6,19 +6,18 @@ namespace Bank_account_management_system.Entities
 {
     class Bank
     {
-        public int Id;
-        public User[] users;
-        static int _count;
+            public int Id;
+            public User[] users = new User[0];
+            static int count = 0;
 
-        public Bank(User[] users)
-        {
-            users = new User[0];
-            Id = ++_count; 
-        }
+            public Bank()
+            {
+                Id = ++count;
+            }
+            static Bank()
+            {
+                count = 0;
+            }
 
-        static Bank()
-        {
-            _count = 1;
         }
     }
-}
